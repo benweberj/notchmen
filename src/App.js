@@ -6,7 +6,7 @@ import Header from './components/Header'
 
 import Home from './pages/Home'
 import Gallery from './pages/Gallery'
-import JobDetails from './pages/JobDetails'
+import Showcase from './pages/Showcase'
 // import About from './pages/About'
 // import Contact from './pages/Contact'
 // import Services from './pages/Services'
@@ -24,7 +24,7 @@ function App() {
             <Routes>
                <Route path="/" element={<Home />} />
                <Route path="/gallery" element={<Gallery />} />
-               <Route path='/gallery/:id' element={<JobDetails />} />
+               <Route path='/gallery/:id' element={<Showcase />} />
                <Route path='*' element={<Unknown />} />
             </Routes>
          </BrowserRouter>

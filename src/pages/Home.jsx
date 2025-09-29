@@ -11,7 +11,7 @@ export default function Home() {
     useEffect(() => {
         setTimeout(() => {
             setActive(true)
-        }, 1000)
+        }, 500)
     }, [])
 
     return <div className='full center col'>
@@ -21,7 +21,7 @@ export default function Home() {
             style={{ fontSize: `max(14px, 2vw)` }}
             initial={{ opacity: 0, y: 0 }}
             animate={{ opacity: 1, y: -20 }}
-            transition={{ duration: 1, delay: 2, type: 'spring' }}
+            transition={{ duration: 1, delay: 1.5, type: 'spring' }}
         >
             Custom Decks & Outdoor Living
         </motion.p>
@@ -29,7 +29,7 @@ export default function Home() {
             <motion.button
                 initial={{ opacity: 0, y: 0 }}
                 animate={{ opacity: 1, y: -20 }}
-                transition={{ duration: 1, delay: 2.5, type: 'spring' }}
+                transition={{ duration: 1, delay: 2, type: 'spring' }}
             >Gallery</motion.button>
         </Link>
     </div>

@@ -11,7 +11,7 @@ const StyledHeader = styled.header`
     top: 0;
     left: 0;
     width: 100dvw;
-    background: #0001;
+    // background: #0001;
     padding: 1rem 4vw;
 
     #logo {
@@ -37,6 +37,7 @@ export default function Header() {
                 onClick={() => navigate('/')}
             />
             <nav className='center sep-x5'>
+                <span onClick={() => navigate('/gallery')}>Gallery</span>
                 <span onClick={() => navigate('/about')}>About Us</span>
                 <span onClick={() => navigate('/contact')}>Contact</span>
                 <span onClick={() => navigate('/reviews')}>Reviews</span>

@@ -29,6 +29,12 @@ export const GlobalStyle = createGlobalStyle`
         width: 100%;
     }
 
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #0005; border-radius: 5px; transition: all 0.25s ease; }
+    ::-webkit-scrollbar-thumb:hover { background: #0008; }
+
+
     body {
         padding: 4vw;
         overflow-x: hidden;
@@ -36,6 +42,12 @@ export const GlobalStyle = createGlobalStyle`
 
     .full {
         min-height: 100%;
+        height: 100%;
+    }
+
+    .fill {
+        // height: 100%;
+        flex: 1;
     }
 
     .debug {
@@ -253,7 +265,7 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: space-between;
         align-items: center;
     }
-    .col { flex-direction: column; }
+    .col { display: flex; flex-direction: column; }
 
     /* --- FLEX GAP HELPERS (SEP) --- */
     .sep { display: flex; gap: var(--space-2); }
