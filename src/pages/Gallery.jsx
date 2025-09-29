@@ -110,7 +110,7 @@ const Overview = ({ job }) => {
                     <p>{job.city}, {job.state}</p>
                 </div>
                 <div className='item'>
-                    <img src={`/img/${job.type}.png`} className='icon' alt='' />
+                    <img src={`/img/${job.type.toLowerCase()}.png`} className='icon' alt='' />
                     <p>{job.type}</p>
                 </div>
                 <div className='item'>
