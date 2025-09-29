@@ -10,10 +10,10 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     html {
-        font-size: clamp(15px, 15px + 2vw, 20px);
+        font-size: clamp(14px, 13px + 1vw, 18px);
     }
 
-    body, #root {
+    body {
         font-family: 'Roboto', sans-serif;
         min-height: 100dvh;
         min-height: 100svh;
@@ -21,10 +21,17 @@ export const GlobalStyle = createGlobalStyle`
         
         /* Fallback for older browsers */
         min-height: 100vh;
+
+        display: flex;
+    }
+
+    #root {
+        width: 100%;
     }
 
     body {
         padding: 4vw;
+        overflow-x: hidden;
     }
 
     .full {

@@ -14,8 +14,8 @@ export default function Home() {
         }, 1000)
     }, [])
 
-    return <div className='fs center col'>
-        <Logo active={active}/>
+    return <div className='full center col'>
+        <Logo active={active} />
         <motion.p
             className='upper thin'
             style={{ fontSize: `max(14px, 2vw)` }}
