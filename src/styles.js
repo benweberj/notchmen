@@ -51,15 +51,15 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .debug {
-        border: 2px solid #000;
+        border: 1px solid #000;
         > * {
-            border: 1px solid #000;
+            border: 1px solid #000c;
             > * {
-                border: 1px solid #000a;
+                border: 1px solid #0009;
                 > * {
-                    border: 1px solid: #0005;
+                    border: 1px solid: #0006;
                     > * {
-                        border: 1px dashed #0005;
+                        border: 1px dashed #0003;
                     }
                 }
             }
@@ -266,6 +266,7 @@ export const GlobalStyle = createGlobalStyle`
         align-items: center;
     }
     .col { display: flex; flex-direction: column; }
+    .wrap { display: flex; flex-wrap: wrap; }
 
     /* --- FLEX GAP HELPERS (SEP) --- */
     .sep { display: flex; gap: var(--space-2); }

@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 const tempImage = 'https://www.flooringinc.com/media/magefan_blog/2024/04/Woodendeck-GettyImages-912332782-2473b41993164927aa6605cf13f6cacf.jpg'
@@ -19,16 +20,20 @@ const job = {
 const Container = styled.div`
 
     main {
-        border: 1px solid red;
+        
         
         .images {
             img#preview {
-                height: 60vh;
+                // max-height: 20vw;
+                width: 40vw;
+                // height: 60vh;
+                // max-width: 90vw;
                 border-radius: 1rem;
             }
             .others {
+
                 img {
-                    height: 3vw;
+                    height: 2rem;
                     border-radius: 0.25rem;
                 }
             }
@@ -42,12 +47,18 @@ export default function Showcase() {
     const { id } = useParams()
 
     return (
-        <Container className='full col'>
+        <Container className='full col debug'>
             <h1>Some Deck</h1>
             <main className='fill center'>
                 <div className='images'>
-                    <img src={tempImage} id='preview' />
-                    <div className='sep2 others'>
+                    
+                    <motion.img
+                        src={tempImage}
+                        id='preview'
+                        // initial={{ }}
+                        // animate={{ width:  }}
+                    />
+                    <div className='others sep2 wrap'>
                         {job.images.map(src => <img src={src} /> )}
                     </div>
                 </div>
