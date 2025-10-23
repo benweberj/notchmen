@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         font-family: 'Lexend', sans-serif;
+        color: white;
     }
 
     html {
@@ -16,11 +17,11 @@ export const GlobalStyle = createGlobalStyle`
     body {
         font-family: 'Roboto', sans-serif;
         min-height: 100dvh;
-        min-height: 100svh;
-        min-height: 100lvh;
+        // min-height: 100svh;
+        // min-height: 100lvh;
         
-        /* Fallback for older browsers */
-        min-height: 100vh;
+        // /* Fallback for older browsers */
+        // min-height: 100vh;
 
         display: flex;
     }
@@ -38,6 +39,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         padding: 4vw;
         overflow-x: hidden;
+        background: radial-gradient(#4B3A2F, #26201C);
     }
 
     .full {
@@ -122,9 +124,27 @@ export const GlobalStyle = createGlobalStyle`
         background: #0002;
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
+        transition: all 0.25s ease;
 
         &:hover {
             background: #0004;
+        }
+
+        &.primary {
+            background: #FFD399;
+            color: #47382D;
+        }
+        
+        &.secondary {
+            background: #BBA08155;
+            color: #fff;
+        }
+        
+        &.primary, &.secondary {
+            &:hover {
+                background: white;
+                color: #47382D;
+            }
         }
     }
 

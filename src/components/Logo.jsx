@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useMemo } from 'react'
+import { motion, stagger } from 'framer-motion'
 
 
 const paths = [
@@ -26,7 +26,7 @@ const dirs = [
     1,
     2
 ]
-const ORIGINAL_W = 1366
+const ORIGINAL_W = 1266
 const ORIGINAL_H = 214
 const MAX_DISPLACEMENT = 100
 
@@ -55,11 +55,12 @@ function getOffset(i, axis, scaleX = 1, scaleY = 1) {
 export default function Logo({ active }) {
     const [w, setW] = useState(ORIGINAL_W)
     const [h, setH] = useState(ORIGINAL_H)
+    const [pathStates, setPathStates] = useState(() => paths.map(() => false))
 
     useEffect(() => {
         function handleResize() {
-            const newW = Math.max(500, window.innerWidth / 1.5)
-            const newH = newW / 6.383
+            const newW = Math.max(300, window.innerWidth / 3)
+            const newH = newW / 3.3
             setW(newW)
             setH(newH)
         }
@@ -68,34 +69,64 @@ export default function Logo({ active }) {
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
+    useEffect(() => {
+        if (active) {
+            // animate in one by one
+            paths.forEach((_, i) => {
+            setTimeout(() => {
+                setPathStates(prev => {
+                const next = [...prev]
+                next[i] = true
+                return next
+                })
+            }, i * 100) // delay per path (matches 0.1s)
+            })
+        } else {
+            // reset all immediately or reverse-delay if you want fade-out
+            setPathStates(paths.map(() => false))
+        }
+    }, [active, paths])
+
+    // I have no clue how to change the padding without fucking everything up
+    // But it works for now so I'm just gonna leave this untouched.
     const scaleX = w / ORIGINAL_W
     const scaleY = h / ORIGINAL_H
     const PADDING = MAX_DISPLACEMENT
-    const paddedViewBox = `${0} ${0} ${ORIGINAL_W + 2 * PADDING} ${ORIGINAL_H + 2 * PADDING}`
+    const paddedViewBox = `${0} ${0} ${ORIGINAL_W} ${ORIGINAL_H + 2 * PADDING}`
+
+    const offsets = useMemo(() => paths.map((_, i) => ({
+        x: getOffset(i, 0, scaleX, scaleY),
+        y: getOffset(i, 1, scaleX, scaleY)
+    })), [paths, scaleX, scaleY])
+
+    let cur = 0
 
     return (
         <svg
+            className=''
             width={w}
             height={h}
             viewBox={paddedViewBox}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
-            <g transform={`translate(${PADDING},${PADDING})`}>
-                {paths.map((d, i) => (
-                    <motion.path
-                        fill='black'
+            <g transform={`translate(${-50},${PADDING})`}>
+                {paths.map((d, i) => {
+                    cur++
+
+                    return <motion.path
+                        fill='white'
                         d={d}
                         key={i}
                         initial={{ opacity: 0 }}
                         animate={{
-                            opacity: active ? 1 : 0,
-                            x: active ? 0 : getOffset(i, 0, scaleX, scaleY),
-                            y: active ? 0 : getOffset(i, 1, scaleX, scaleY)
+                            opacity: pathStates[i] ? 1 : 0,
+                            x: pathStates[i] ? 0 : offsets[i].x,
+                            y: pathStates[i] ? 0 : offsets[i].y
                         }}
-                        transition={{ duration: 0.7, delay: i * 0.1, type: 'spring' }}
+                        transition={{ duration: 1, type: 'spring' }}
                     />
-                ))}
+                })}
             </g>
         </svg>
     )

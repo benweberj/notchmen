@@ -1,12 +1,12 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+// import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { GlobalStyle } from './styles'
 
-import Header from './components/Header'
+// import Header from './components/Header'
 
 import Home from './pages/Home'
-import Gallery from './pages/Gallery'
-import Showcase from './pages/Showcase'
+// import Gallery from './pages/Gallery'
+// import Showcase from './pages/Showcase'
 // import About from './pages/About'
 // import Contact from './pages/Contact'
 // import Services from './pages/Services'
@@ -19,23 +19,23 @@ function App() {
    return (
       <>
          <GlobalStyle />
-         <BrowserRouter>
-            <Header />
+         <Home />
+         {/* <BrowserRouter>
             <Routes>
                <Route path="/" element={<Home />} />
                <Route path="/gallery" element={<Gallery />} />
                <Route path='/gallery/:id' element={<Showcase />} />
                <Route path='*' element={<Unknown />} />
             </Routes>
-         </BrowserRouter>
+         </BrowserRouter> */}
 
       </>
   )
 }
 
 
-const Unknown = () => <div className='full center'>
-   That page dont work yet bro
-</div>
+// const Unknown = () => <div className='full center'>
+//    That page dont work yet bro
+// </div>
 
 export default App
