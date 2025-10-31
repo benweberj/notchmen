@@ -11,7 +11,8 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     html {
-        font-size: clamp(14px, 13px + 1vw, 18px);
+        font-size: clamp(14px, 1.5dvw, 16px);
+        // font-size: 13px;
     }
 
     body {
@@ -122,9 +123,10 @@ export const GlobalStyle = createGlobalStyle`
         outline: 0;
         border: 0;
         background: #0002;
-        padding: 0.5rem 1rem;
+        padding: 0.75rem 1.5rem;
         border-radius: 0.5rem;
         transition: all 0.25s ease;
+        font-size: 1rem;
 
         &:hover {
             background: #0004;
