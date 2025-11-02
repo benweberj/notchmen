@@ -69,7 +69,7 @@ export default function Home() {
                 </motion.div>
             </div>
 
-            <button style={{ opacity: home ? 0 : 1, disabled: home, transition: 'all 1s ease' }} onClick={() => setPage('home')}>WAIT FUCK GO BACK</button>
+            <button style={{ opacity: home ? 0 : 1, disabled: home, transition: 'all 1s ease' }} onClick={() => setPage('home')}>In Progress</button>
             
             <Glazing active={home} />
         </div>
