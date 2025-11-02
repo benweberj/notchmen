@@ -10,6 +10,10 @@ import { motion } from 'framer-motion'
 
 export default function Home() {
     const [active, setActive] = useState(false)
+    const [page, setPage] = useState('home')
+
+    const home = page === 'home'
+    const gallery = page === 'gallery'
     
     useEffect(() => {
         setTimeout(() => {
@@ -21,41 +25,53 @@ export default function Home() {
 
         <div className='full center col'>
             <Backdrop />
+            {/* <Deckboards active={inTransition} /> */}
 
             {/* <Music /> */}
             {/* <Deckboards /> */}
             {/* <audio src='/theme.mp3' autoPlay loop /> */}
 
             <div>
-                <motion.h6
-                    className='thin'
-                    style={{ color: '#FfD399', transformOrigin: 'left center' }}
-                    initial={{ opacity: 0, x: 20, y: 20, scaleX: 1.2 }}
-                    animate={{ opacity: 1, x: 0, scaleX: 1 }}
-                    transition={{ duration: .5, delay: 1.5, type: 'tween' }}
-                >
-                    Where beauty meets resilience
-                </motion.h6>
-                
-                <Logo active={active} />
+                <motion.div animate={{ x: home ? 0 : 50, opacity: home ? 1 : 0 }} transition={{ duration: 1 }}>
 
-                <div className='flex wrap'>
-                    <motion.button 
-                        className='secondary mr2'
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 1.75, type: 'spring' }}
-                    >Browse our gallery</motion.button>
-                    <motion.button
-                        className='primary'
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 2, type: 'spring' }}
-                    >Start your project</motion.button>
-                </div>
+                    <motion.h6
+                        className='thin'
+                        style={{ color: '#FfD399', transformOrigin: 'left center' }}
+                        initial={{ opacity: 0, x: 20, y: 20, scaleX: 1.2 }}
+                        animate={{ opacity: 1, x: 0, scaleX:  1 }}
+                        transition={{ duration: .5, delay: 1.5, type: 'tween' }}
+                    >
+                        Where beauty meets resilience
+                    </motion.h6>
+                    
+                    <Logo active={active && home} />
+
+                </motion.div>
+
+                <motion.div animate={{ x: home ? 0 : -50, opacity: home ? 1 : 0 }} transition={{ duration: 1 }}>
+                    
+                    <div className='flex wrap'>
+                        <motion.button 
+                            onClick={() => setPage('gallery')}
+                            className='secondary mr2'
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1.75, type: 'spring' }}
+                        >Browse our gallery</motion.button>
+                        <motion.button
+                            className='primary'
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 2, type: 'spring' }}
+                        >Start your project</motion.button>
+                    </div>
+
+                </motion.div>
             </div>
+
+            <button style={{ opacity: home ? 0 : 1, disabled: home, transition: 'all 1s ease' }} onClick={() => setPage('home')}>WAIT FUCK GO BACK</button>
             
-            <Glazing />
+            <Glazing active={home} />
         </div>
     )
 }
@@ -106,13 +122,19 @@ const GlazeContainer = styled.div`
     }
 `
 
-const Glazing = () => {
+const Glazing = ({ active }) => {
     const doubled = [...glazes, ...glazes]
     return (
         <GlazeContainer>
             <ul className='glazeList'>
                 {doubled.map((g, i) => (
-                    <motion.li initial={{ opacity: 0, y: 50 }} animate={{ opacity: .5, y: 0 }} transition={{ delay: i*.5, duration: 1 }}>{g}</motion.li>
+                    <motion.li
+                        initial={{ opacity: 0, scaleY: .5 }}
+                        animate={{ opacity: active ? .5 : 0, scaleY: active ? 1 : .5 }}
+                        transition={{ delay: active ? (i*.5 + 1) : 0, duration: 1 }}
+                    >
+                        {g}
+                    </motion.li>
                 ))}
             </ul>
 
@@ -215,13 +237,13 @@ const _Deckboards = styled.div`
 `
 
 
-function Deckboards() {
+function Deckboards({ active }) {
     return <_Deckboards>
-        {Array.from({length: 41}, (_, i) => (
+        {Array.from({length: window.innerWidth/40 }, (_, i) => (
             <motion.img
                 src='/img/deckboard.png'
                 initial={{ opacity: 0, y: '-100%' }}
-                animate={{ opacity: 1, y: 0 }}
+                animate={{ opacity: active ? 1 : 0, y: active ? 0 : '-100%' }}
                 transition={{ duration: .5, delay: i * 0.05, type: 'spring' }}
             />
         ))}
